@@ -7,6 +7,7 @@ router.route('/')
     .post(itemController.createItem);
 
 router.route('/:id')
+    .get(itemController.getItemById)
     .put(itemController.updateItem)
     .delete(itemController.deleteItem);
 
