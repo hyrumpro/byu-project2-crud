@@ -12,9 +12,14 @@ connectDB();
 
 app.use(express.json());
 
+
 app.get('/', (req, res) => {
     res.send('Hello to my Api Project');
 });
+
+
+app.use('/api/items', itemRoutes);
+
 
 app.use((req, res, next) => {
     const error = new Error('Not Found');
@@ -22,8 +27,7 @@ app.use((req, res, next) => {
     next(error);
 });
 
-app.use('/api/items', itemRoutes);
-
+// Error handler middleware
 app.use(errorHandler);
 
 module.exports = app;
