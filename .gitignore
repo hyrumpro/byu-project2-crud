@@ -1,0 +1,12 @@
+
+.env
+.env.local
+
+
+.idea/
+
+
+node_modules/
+
+
+package-lock.json
