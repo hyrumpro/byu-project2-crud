@@ -10,6 +10,10 @@ const setupSwagger = require('./config/swagger');
 
 dotenv.config();
 
+
+
+const isProduction = process.env.NODE_ENV
+
 const app = express();
 
 connectDB();
@@ -22,7 +26,8 @@ app.use(session({
     cookie: {
         maxAge: 1000 * 60 * 60 * 24,
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production'
+        secure: isProduction,
+        sameSite: isProduction ? 'none' : 'lax',
     }
 }));
 app.use(passport.initialize());
