@@ -53,11 +53,13 @@ passport.use(new GitHubStrategy({
 }));
 
 passport.serializeUser((user, done) => {
+    console.log('Serializing user:', user);
     done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
     try {
+        console.log('Deserializing user ID:', id);
         const user = await User.findById(id);
         done(null, user);
     } catch (error) {

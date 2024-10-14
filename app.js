@@ -7,14 +7,21 @@ const errorHandler = require('./middleware/errorHandler');
 const session = require('express-session');
 const passport = require('./config/passport');
 const setupSwagger = require('./config/swagger');
+const cors = require('cors');
 
 dotenv.config();
 
 
 
 const isProduction = process.env.NODE_ENV
+console.log('NODE_ENV:', process.env.NODE_ENV, isProduction);
 
 const app = express();
+
+app.use(cors({
+    origin: 'https://byu-project2-crud.onrender.com',
+    credentials: true
+}));
 
 connectDB();
 
