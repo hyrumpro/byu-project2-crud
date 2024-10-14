@@ -1,4 +1,3 @@
-// config/swagger.js
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const dotenv = require('dotenv');
@@ -16,7 +15,7 @@ const options = {
         servers: [
             {
                 url: process.env.BASE_URL || 'http://localhost:3000',
-                description: 'Development server',
+                description: 'Production server',
             },
         ],
         components: {
@@ -24,7 +23,7 @@ const options = {
                 cookieAuth: {
                     type: 'apiKey',
                     in: 'cookie',
-                    name: 'connect.sid', // Default cookie name for express-session
+                    name: 'connect.sid',
                 },
             },
             schemas: {
