@@ -8,7 +8,7 @@ dotenv.config();
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "/auth/google/callback",
+    callbackURL: "https://byu-project2-crud.onrender.com/auth/google/callback",
     scope: ['profile', 'email']
 }, async (accessToken, refreshToken, profile, done) => {
     try {
@@ -28,7 +28,7 @@ passport.use(new GoogleStrategy({
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: "/auth/github/callback",
+    callbackURL: "https://byu-project2-crud.onrender.com/auth/github/callback",
     scope: ['read:user']
 }, async (accessToken, refreshToken, profile, done) => {
     try {
