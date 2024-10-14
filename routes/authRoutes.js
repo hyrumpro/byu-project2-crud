@@ -9,7 +9,6 @@ const router = express.Router();
  *   description: OAuth Authentication Routes
  */
 
-
 /**
  * @swagger
  * /auth/google/callback:
@@ -66,7 +65,10 @@ const router = express.Router();
  *               properties:
  *                 message:
  *                   type: string
+ *                   example: Please authenticate using /auth/google or /auth/github
  */
+
+// Authentication Routes
 router.get('/google',
     passport.authenticate('google', { scope: ['profile', 'email'] }));
 
@@ -77,7 +79,7 @@ router.get('/google/callback',
     });
 
 router.get('/github',
-    passport.authenticate('github', { scope: ['read:user'] }));
+    passport.authenticate('github', { scope: ['user:email', 'read:user'] }));
 
 router.get('/github/callback',
     passport.authenticate('github', { failureRedirect: '/' }),
@@ -96,7 +98,8 @@ router.get('/logout', (req, res, next) => {
 });
 
 router.get('/login', (req, res) => {
-    res.status(200).json({ message: 'Please authenticate using /auth/google/callback or /auth/github/callback' });
+    res.status(200).json({ message: 'Please authenticate using /auth/google or /auth/github' });
 });
 
 module.exports = router;
+

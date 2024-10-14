@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const itemController = require('../controllers/itemController');
 const auth = require('../middleware/auth');
+const validate = require('../middleware/validate');
+const { validateCreateItem, validateUpdateItem, validateItemId } = require('../validators/itemValidator');
 
 /**
  * @swagger
@@ -153,13 +155,14 @@ const auth = require('../middleware/auth');
  *         $ref: '#/components/responses/NotFound'
  */
 
+
 router.route('/')
     .get(auth, itemController.getAllItems)
-    .post(auth, itemController.createItem);
+    .post(auth, validateCreateItem, validate, itemController.createItem);
 
 router.route('/:id')
-    .get(auth, itemController.getItemById)
-    .put(auth, itemController.updateItem)
-    .delete(auth, itemController.deleteItem);
+    .get(auth, validateItemId, validate, itemController.getItemById)
+    .put(auth, validateUpdateItem, validate, itemController.updateItem)
+    .delete(auth, validateItemId, validate, itemController.deleteItem);
 
 module.exports = router;
