@@ -24,11 +24,11 @@ connectDB();
 app.use(express.json());
 app.use(session({
     secret: process.env.SESSION_SECRET,
-    resave: false,
+    resave: true,
     saveUninitialized: false,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24,
-        httpOnly: true,
+        httpOnly: isProduction,
         secure: isProduction,
         sameSite: 'none',
     }
@@ -37,11 +37,11 @@ app.use(session({
 
 console.log('Session middleware configured with:', {
     secret: process.env.SESSION_SECRET ? 'Set' : 'Not set',
-    cookieMaxAge: 1000 * 60 * 60 * 24,
-    httpOnly: true,
-    secure: isProduction,
-    sameSite: 'none'
+    httpOnly: isProduction,
+    secure: isProduction
 });
+
+
 
 
 app.use(passport.initialize());
