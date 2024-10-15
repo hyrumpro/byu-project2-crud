@@ -42,7 +42,6 @@ console.log('Session middleware configured with:', {
 
 
 
-
 app.use(passport.initialize());
 app.use(passport.session());
 
