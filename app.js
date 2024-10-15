@@ -20,7 +20,9 @@ const app = express();
 
 app.use(cors({
     origin: 'https://byu-project2-crud.onrender.com',
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 connectDB();
@@ -34,11 +36,24 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24,
         httpOnly: true,
         secure: isProduction,
-        sameSite: isProduction ? 'none' : 'lax',
+        sameSite: 'none',
     }
 }));
+
+
+console.log('Session middleware configured with:', {
+    secret: process.env.SESSION_SECRET ? 'Set' : 'Not set',
+    cookieMaxAge: 1000 * 60 * 60 * 24,
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: 'none'
+});
+
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 
 
 setupSwagger(app);
