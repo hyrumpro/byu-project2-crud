@@ -13,9 +13,10 @@ dotenv.config();
 
 
 const isProduction = process.env.SESSION_SECRET ? 'true' : 'false';
-console.log('NODE_ENV:', process.env.NODE_ENV, isProduction);
 
 const app = express();
+
+app.set('trust proxy', 1);
 
 
 
@@ -28,7 +29,8 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24,
-        secure: isProduction,
+        httpOnly: true,
+        secure: isProduction
     }
 }));
 
