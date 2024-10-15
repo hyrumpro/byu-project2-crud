@@ -21,6 +21,7 @@ passport.use(new GoogleStrategy({
         });
         done(null, user);
     } catch (error) {
+        console.error('Error in Google strategy:', error);
         done(error, null);
     }
 }));
@@ -48,6 +49,7 @@ passport.use(new GitHubStrategy({
         });
         done(null, user);
     } catch (error) {
+        console.error('Error in Google strategy:', error);
         done(error, null);
     }
 }));
