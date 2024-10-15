@@ -24,7 +24,7 @@ connectDB();
 app.use(express.json());
 app.use(session({
     secret: process.env.SESSION_SECRET,
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24,
@@ -34,7 +34,7 @@ app.use(session({
 
 
 console.log('Session middleware configured with:', {
-    secret: process.env.SESSION_SECRET ? 'Set' : 'Not set',
+    secret: process.env.SESSION_SECRET,
     httpOnly: isProduction,
     secure: isProduction
 });
