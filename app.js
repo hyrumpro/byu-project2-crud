@@ -13,7 +13,7 @@ dotenv.config();
 
 
 
-const isProduction = process.env.NODE_ENV
+const isProduction = process.env.SESSION_SECRET ? 'true' : 'false';
 console.log('NODE_ENV:', process.env.NODE_ENV, isProduction);
 
 const app = express();
